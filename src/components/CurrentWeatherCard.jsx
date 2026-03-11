@@ -1,7 +1,8 @@
 import React from 'react'
 
 function CurrentWeatherCard({data}) {
-  if (!data) return <div>Loading weather data...</div>;
+
+  if (!data) return <div className='container mt-4'>Loading weather data...</div>;
   
   // Debug: Check icon data
   // console.log("Weather data:", data);
