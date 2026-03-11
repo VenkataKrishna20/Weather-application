@@ -9,17 +9,17 @@ function WeatherPage() {
     //States
     const [city ,setCity] = useState("Chennai");
     const [currentweather, setCurrentweather] = useState(null);
-    const [forecast, setForecast] = useState(null);
+    const [forecast, setForecast] = useState([]);
     const [error, setError] = useState(null);
     const [isloading, setIsloading] = useState(false);  
 
     const handleSearch=(newcity)=>{
         setCity(newcity);
         setCurrentweather(null);
-        setForecast(null);
+        setForecast([]);
         setError(null);
     }
-
+    
     //get data from WeatherAPI
     const fetchDataByCity = async()=>{
         setIsloading(true);
@@ -39,7 +39,7 @@ function WeatherPage() {
         }catch(err){
             setError("Failed to fetch the data");
             setCurrentweather(null);
-            setForecast(null);
+            setForecast([]);
         }finally{
             setIsloading(false);
         }
@@ -50,11 +50,22 @@ useEffect(()=>{
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar onSearch={handleSearch} />
       <CurrentWeatherCard data={currentweather}/>   
-      <ForecastDay/>
+      { forecast.length!==0 && (
+        <div className='container mt-5'>
+        <div className='d-flex'>
+            {
+                forecast.list.slice(0,5).map((forecastObj,index)=>(
+                    <ForecastDay key={index} foreCast={forecastObj} />
+                ))
+                
+            }
+        </div>
+        </div>
+      )}
     </div>
   )
 }
 
-export default WeatherPage
+export default WeatherPage;

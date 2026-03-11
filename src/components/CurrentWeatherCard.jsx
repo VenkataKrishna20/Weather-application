@@ -8,7 +8,7 @@ function CurrentWeatherCard({data}) {
   // console.log("Icon code:", data.weather[0]?.icon);
   
   return (
-    <div className='bg-info p-4'>
+    <div className='bg-info p-4 container justify-content-cente mt-4'>
      <h2>Current Weather in {data.name}</h2>
      <img src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="Weather Icon" width='50px'onError={(e) => {e.target.style.border = '1px solid red'}} />
        <p>Tempareture: {data.main.temp}°C</p>
